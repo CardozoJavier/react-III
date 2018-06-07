@@ -4,10 +4,12 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
 import Albums from '../components/Albums';
+import FilterableArtistsContainer from '../containers/FilterableArtistsContainer';
 import SingleAlbum from '../components/SingleAlbum';
 import audio from '../audio';
 import Artists from '../components/Artists';
 import Artist from '../components/Artist';
+import NewPlaylistsContainer from './NewPlaylistsContainer';
 
 export default class Main extends React.Component {
   constructor(){
@@ -139,7 +141,7 @@ export default class Main extends React.Component {
                 />
               )} 
             />
-            <Route path="/artists" exact render={() => <Artists artists={artists} />} />
+            <Route path="/artists" exact render={() => <FilterableArtistsContainer artists={artists} />} />
             <Route path="/artists/:id" render={({ match }) => 
               <Artist
                 artistId={match.params.id}
@@ -150,6 +152,7 @@ export default class Main extends React.Component {
                 selectedSong={selectedSong}
                 selectArtist={this.selectArtist} />}
               />
+            <Route exact path="/newplaylist" render={() => <NewPlaylistsContainer/>}/>
             <Redirect from="/" to="/albums" />
           </Switch>
         </div>
